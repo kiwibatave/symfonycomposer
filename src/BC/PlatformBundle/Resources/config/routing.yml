@@ -3,30 +3,46 @@
 #    path:     /hello-world
 #    defaults: { _controller: BCPlatformBundle:Advert:index }
 #On peut supprimer notre première route car celle de platform_home pointe dans le même direction
-bye_the_world:
-    path:    /bye-world
-    defaults: { _controller: BCPlatformBundle:Advert:end }
+#bye_the_world:
+#    path:    /bye-world
+#    defaults: { _controller: BCPlatformBundle:Advert:end }
 
 bc_platform_home:
-    path:    /platform
-    defaults: { _controller: BCPlatformBundle:Advert:index}
+    path:    /{page}
+    defaults: { _controller: BCPlatformBundle:Advert:index, page:    1}
+    requirements:
+        page: \d*
 
 bc_platform_view:
     path:    /advert/{id}
     defaults: { _controller: BCPlatformBundle:Advert:view}
-
-bc_platform_view_slug:
-    path:    /{year}/{slug}.{format}
-    defaults: { _controller: BCPlatformBundle:Advert:viewSlug, format:    html }
-#On rend le paramètre format facultatif en le mettant dans defaults
-#On rajoute des contraintes dans les paramètres afin que $year n'accepte que des chiffres
     requirements:
-      year:    \d{4}
-      format: html|xml
+        id: \d+
+
+#bc_platform_view_slug:
+#    path:    /{year}/{slug}.{format}
+#    defaults: { _controller: BCPlatformBundle:Advert:viewSlug, format:    html }
+##On rend le paramètre format facultatif en le mettant dans defaults
+##On rajoute des contraintes dans les paramètres afin que $year n'accepte que des chiffres
+#    requirements:
+#      year:    \d{4}
+#      format: html|xml
 
 bc_platform_add:
     path:    /add
     defaults: { _controller: BCPlatformBundle:Advert:add}
+
+bc_platform_edit:
+    path:    /edit/{id}
+    defaults: { _controller: BCPlatformBundle:Advert:edit}
+    requirements:
+      id:    \d+
+
+bc_platform_delete:
+    path:    /delete/{id}
+    defaults: { _controller: BCPlatform:Bundle:Advert:delete}
+    requirements:
+      id:    \d+
 
 
 
