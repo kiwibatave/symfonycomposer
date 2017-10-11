@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // le nom de notre contrôleur respecte le nom du fichier pour que l'autoload fonctionne.
 use Symfony\Component\HttpFoundation\Request;
 //Use utilisé pour récupérer le Request
+use Symfony\Component\HttpFoundation\RedirectResponse;
+//use pour rediriger la réponse
 use Symfony\Component\HttpFoundation\Response;
 //Ce use est utilisé pour générer l'url complète de chaque page
 //use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -19,10 +21,24 @@ use Symfony\Component\HttpFoundation\Response;
 class AdvertController extends Controller
 {
     //On injecte la requête dans les arguments de la méthode
-    public function viewAction($id, Request $request)
+    public function viewAction($id)
     {
         // On récupère le paramètre tag
-         $tag = $request->query->get('tag');
+        // $tag = $request->query->get('tag');
+
+        // Création de la réponse en JSON grâce à json_encode()
+        $response = new Response(json_encode(array('id' => $id)));
+
+        // Définition du Content-type pour indiquer au navigateur
+        // que l'on renvoie du json et non du html
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+
+
+
+//        return $this->redirectToRoute('bc_platform_home');
 
         // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
         // Ici, on récupèrera depuis la base de données
@@ -32,10 +48,10 @@ class AdvertController extends Controller
 
         // On utilise le raccourci : il crée un objet Response
         //Et on lui donne comme contenu, le contenu du template
-        return $this->render(
-            'BCPlatformBundle:Advert:view.html.twig',
-            array('id' => $id, 'tag' => $tag)
-        );
+//        return $this->render(
+//            'BCPlatformBundle:Advert:view.html.twig',
+//            array('id' => $id, 'tag' => $tag)
+//        );
 
 //        // On crée la réponse sans contenu (pour l'instant)
 //        $response = new Response();
