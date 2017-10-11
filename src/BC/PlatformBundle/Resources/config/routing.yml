@@ -1,0 +1,24 @@
+#    Ajout d'une nouvelle route pour afficher "hello the world"
+#hello_the_world:
+#    path:     /hello-world
+#    defaults: { _controller: BCPlatformBundle:Advert:index }
+#On peut supprimer notre première route car celle de platform_home pointe dans le même direction
+bye_the_world:
+    path:    /bye-world
+    defaults: { _controller: BCPlatformBundle:Advert:end }
+
+bc_platform_home:
+    path:    /platform
+    defaults: { _controller: BCPlatformBundle:Advert:index}
+
+bc_platform_view:
+    path:    /platform/advert/{id}
+    defaults: { _controller: BCPlatformBundle:Advert:view}
+
+bc_platform_view_slug:
+    path:    /platform/{year}/{slug}.{format}
+    defaults: { _controller BCPlatformBundle:Advert:viewSlug}
+
+bc_platform_add:
+    path:    /platform/add
+    defaults: { _controller: BCPlatformBundle:Advert:add}
