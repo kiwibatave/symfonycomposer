@@ -1,3 +1,4 @@
+#On ajoute le prefix platform pour définir ce raccourci à chaque route créée
 bc_platform:
     resource: "@BCPlatformBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:    /platform

@@ -14,15 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdvertController extends Controller
 {
-    public function viewAction($id)
+    public function viewAction()
     {
-        // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
-        // Ici, on récupèrera depuis la base de données
-        // l'annonce correspondant à l'id $id.
-        // Puis on passera l'annonce à la vue pour
-        // qu'elle puisse l'afficher
-
-        return new Response("Affichage de l'annonce d'id: ".$id);
+        //On souhaite avoir l'url de l'annonce d'id par exemple 5.
+        $url = $this->get('router')->generate(
+            'bc_platform_view', // On passe le 1er argument : le nom de la route
+            array('id' => 5)
+        );
+        //$url vaut maintenant /platform/advert/5
+        return new Response("L'URL de l'annonce d'id 5 est : ".$url);
     }
 
     public function viewSlugAction($slug, $year, $format)
