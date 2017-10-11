@@ -17,7 +17,13 @@ bc_platform_view:
 
 bc_platform_view_slug:
     path:    /platform/{year}/{slug}.{format}
-    defaults: { _controller BCPlatformBundle:Advert:viewSlug}
+    defaults: { _controller: BCPlatformBundle:Advert:viewSlug, format:    html }
+#On rend le paramètre format facultatif en le mettant dans defaults
+#On rajoute des contraintes dans les paramètres afin que $year n'accepte que des chiffres
+    requirements:
+      year:    \d{4}
+      format: html|xml
+
 
 bc_platform_add:
     path:    /platform/add
