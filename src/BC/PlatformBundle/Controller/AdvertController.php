@@ -22,14 +22,34 @@ class AdvertController extends Controller
     public function viewAction($id, Request $request)
     {
         // On récupère le paramètre tag
-        $tag = $request->query->get('tag');
+         $tag = $request->query->get('tag');
+
         // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
         // Ici, on récupèrera depuis la base de données
         // l'annonce correspondant à l'id $id.
         // Puis on passera l'annonce à la vue pour
         // qu'elle puisse l'afficher
 
-        return new Response("Affichage de l'annonce d'id: ".$id.", avec le tag : ".$tag);
+        // On utilise le raccourci : il crée un objet Response
+        //Et on lui donne comme contenu, le contenu du template
+        return $this->render(
+            'BCPlatformBundle:Advert:view.html.twig',
+            array('id' => $id, 'tag' => $tag)
+        );
+
+//        // On crée la réponse sans contenu (pour l'instant)
+//        $response = new Response();
+//
+//        // On définit le contenu
+//        $response->setContent("Ceci est une page d'erreur 404");
+//
+//        // On définit le code http à Not Found (erreur 404)
+//        $response->setStatusCode(Response::HTTP_NOT_FOUND);
+//
+//        // On retourne la réponse
+//        return $response;
+
+//        return new Response("Affichage de l'annonce d'id: ".$id.", avec le tag : ".$tag);
     }
 
     public function viewSlugAction($slug, $year, $format)
