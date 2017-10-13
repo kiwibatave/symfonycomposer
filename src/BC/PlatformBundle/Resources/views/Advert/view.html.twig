@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Affichage de l'annonce {{ id }}</title>
-    </head>
-    <body>
-        <h1>Hello Annonce n°{{ id }} !</h1>
-        <p>Tag éventuel : {{ tag }}</p>
-    </body>
-</html>
+{% extends "BCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Lecture d'une ad - {{ parent() }}
+{% endblock %}
+
+{% block bcplatform_body %}
+
+    <h2>{{ advert.title }}</h2>
+    <i>By {{ advert.author }}, the {{ advert.date|date('d/m/Y') }}</i>
+
+    <div class="well">
+        {{ advert.content }}
+    </div>
+
+    <p>
+        <a href="{{ path('bc_platform_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back to the list
+        </a>
+        <a href="{{ path('bc_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+            Mod Ad
+        </a>
+        <a href="{{ path('bc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            Supp
+        </a>
+    </p>
+{% endblock %}
+{#<!DOCTYPE html>#}
+{#<html>#}
+    {#<head>#}
+        {#<title>Affichage de l'annonce {{ id }}</title>#}
+    {#</head>#}
+    {#<body>#}
+        {#<h1>Hello Annonce n°{{ id }} !</h1>#}
+
+        {#<div>#}
+            {# Affichage de tous les messages Flash dont le nom est "info" #}
+            {#{% for message in app.session.flashbag.get('info') %}#}
+                {#<p>Message flash : {{ message }}</p>#}
+            {#{% endfor %}#}
+        {#</div>#}
+
+        {#<p>#}
+            {#Ici, nous pourrons lire l'annonce ayant comme id : {{ id }}<br />#}
+            {#Mais pour le moment, nous ne savons pas encore comment le faire !!!#}
+        {#</p>#}
+    {#</body>#}
+{#</html>#}

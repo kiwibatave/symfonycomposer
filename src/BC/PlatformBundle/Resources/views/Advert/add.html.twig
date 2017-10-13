@@ -1,0 +1,21 @@
+{% extends "BCPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+
+    <h2>Add an ad</h2>
+
+    {{ include("BCPlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        Warning !!! This add will be added directly
+        on the home page after the validation of the form.
+    </p>
+
+    <p>
+        <a href="{{ path('bc_platform_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back to menu
+        </a>
+    </p>
+
+{% endblock %}

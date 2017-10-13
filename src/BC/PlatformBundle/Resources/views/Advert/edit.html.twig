@@ -1,0 +1,25 @@
+{% extends "BCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Modify an ad - {{ parent() }}
+{% endblock %}
+
+{% block bcplatform_body %}
+
+    <h2>Modify an ad</h2>
+
+    {{ include("BCPlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        Vous éditez une annonce déjà existante, merci de ne pas changer
+        l'esprit général de l'annonce déjà publiée.
+    </p>
+
+    <p>
+        <a href="{{ path('bc_platform_view', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back to the ad
+        </a>
+    </p>
+
+{% endblock %}

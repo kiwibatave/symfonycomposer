@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            Page test Symfony !!
-        </title>
-    </head>
-    <body>
-        <h1>Hello {{ name }} !!</h1>
+{% extends "BCPlatformBundle::layout.html.twig" %}
 
-        <p>Le Hello World en code est un classique.
-           Il signifie beaucoup, car cela veut dire que l'on a réussi
-           à éxécuter le programme pour accomplir une tâche simple :
-           AFFICHER DU CODE !!!!!
-        </p>
-    </body>
-</html>
+{% block title %}
+    Acceuil {{ parent() }}
+{% endblock %}
+
+{% block bcplatform_body %}
+
+    <h2>List of ads</h2>
+
+    <ul>
+        {% for advert in listAdverts %}
+            <li>
+                <a href="{{ path('bc_platform_view', {'id': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+                by {{ advert.author }},
+                the {{ advert.date|date('d/m/Y') }}
+            </li>
+        {% else %}
+            <li>No ads (yet)</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+

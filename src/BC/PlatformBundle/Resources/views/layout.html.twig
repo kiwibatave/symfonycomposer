@@ -1,0 +1,15 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+    Ads -{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {# définition d'un sous titre pour toutes les pages du bundle#}
+    <h1>Ads</h1>
+
+    <hr>
+
+    {% block bcplatform_body %}
+    {% endblock %}
+{% endblock %}
