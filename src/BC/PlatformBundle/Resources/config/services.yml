@@ -1,4 +1,21 @@
+
+#bc_platform.antispam:
+#    class: BC\PlatformBundle\Antispam\BCAntispam
+#    arguments:
+#      - "@mailer"
+#      - %locale%
+#      - 50
+
 services:
-#    bc_platform.example:
-#        class: BC\PlatformBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    bc_platform.email.application_mailer:
+        class: BC\PlatformBundle\Email\ApplicationMailer
+        arguments:
+            - "@mailer"
+
+services:
+    bc_platform.doctrine_listener.application_creation:
+        class: BC\PlatformBundle\DoctrineListener\ApplicationCreationListener
+        arguments:
+            - "@bc_platform.email.application_mailer"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist}

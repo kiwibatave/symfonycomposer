@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block bcplatform_body %}
+        {#On vérifie qu'une image soit bien associée à une annonce#}
+    {% if advert.image is not null %}
+        <img src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}" height="60"/>
+    {% endif %}
 
     <h2>{{ advert.title }}</h2>
     <i>By {{ advert.author }}, the {{ advert.date|date('d/m/Y') }}</i>
@@ -12,6 +16,28 @@
     <div class="well">
         {{ advert.content }}
     </div>
+
+    {% if not advert.categories.empty %}
+        <div>
+            Cette annonce est parue dans les catégories suivantes :
+            <ul>
+            {% for category in advert.categories %}
+                {{ category.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if listAdvertSkills|length > 0 %}
+        <div>
+            Cette annonce requiert les compétences suivantes :
+            <ul>
+                {% for advertSkill in listAdvertSkills %}
+                    <li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     <p>
         <a href="{{ path('bc_platform_home') }}" class="btn btn-default">
@@ -27,25 +53,5 @@
             Supp
         </a>
     </p>
+
 {% endblock %}
-{#<!DOCTYPE html>#}
-{#<html>#}
-    {#<head>#}
-        {#<title>Affichage de l'annonce {{ id }}</title>#}
-    {#</head>#}
-    {#<body>#}
-        {#<h1>Hello Annonce n°{{ id }} !</h1>#}
-
-        {#<div>#}
-            {# Affichage de tous les messages Flash dont le nom est "info" #}
-            {#{% for message in app.session.flashbag.get('info') %}#}
-                {#<p>Message flash : {{ message }}</p>#}
-            {#{% endfor %}#}
-        {#</div>#}
-
-        {#<p>#}
-            {#Ici, nous pourrons lire l'annonce ayant comme id : {{ id }}<br />#}
-            {#Mais pour le moment, nous ne savons pas encore comment le faire !!!#}
-        {#</p>#}
-    {#</body>#}
-{#</html>#}
